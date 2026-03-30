@@ -1384,46 +1384,10 @@
 
     </div>
 
-    <div class="global-player">
-        <div class="now-playing" id="now-playing">No song playing</div>
-        
-        <audio id="global-audio" controls></audio>
-    </div>
-
     <div class="footer">
         Page 3 • The Weeknd Discography
     </div>
 
-    <script>
-
-        const mainPlayer = document.getElementById('global-audio');
-        const display = document.getElementById('now-playing');
-
-        const allAudioPlayers = document.querySelectorAll('audio');
-
-        allAudioPlayers.forEach(player => {
-
-            if (player.id === 'global-audio') {
-                return;
-            }
-
-            player.addEventListener('play', function() {
-
-                allAudioPlayers.forEach(stopPlayer => {
-                    stopPlayer.pause();
-                });
-
-                mainPlayer.src = player.src;
-
-                const trackElement = player.parentElement.querySelector('.track-title');
-                const songTitle = trackElement.textContent;
-
-                display.textContent = songTitle;
-
-                mainPlayer.play();
-            });
-        });
-    </script>
 
 </body>
 
