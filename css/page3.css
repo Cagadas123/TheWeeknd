@@ -1,0 +1,324 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Helvetica Neue', sans-serif;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.nav {
+    background: rgba(0, 0, 0, 0.95);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid #e30613;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.nav a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+
+h1 {
+    text-align: center;
+    margin: 60px 0 50px 0;
+    font-size: 52px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #ffffff, #e30613);
+    background-clip: text;
+}
+
+.album-container {
+    max-width: 1000px;
+    margin: 0 auto 70px auto;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(227, 6, 19, 0.15), 0 8px 25px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(227, 6, 19, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.album-container:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(227, 6, 19, 0.25), 0 12px 30px rgba(0, 0, 0, 0.8);
+    border-color: rgba(227, 6, 19, 0.4);
+}
+
+.album-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border-bottom: 2px solid rgba(227, 6, 19, 0.3);
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+}
+
+.album-art {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(227, 6, 19, 0.3), 0 5px 15px rgba(0, 0, 0, 0.6);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.album-container:hover .album-art {
+    transform: scale(1.05) rotate(2deg);
+}
+
+.album-info {
+    flex: 1;
+}
+
+.album-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 0 12px 0;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.album-meta {
+    color: #e30613;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(227, 6, 19, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 10px;
+    margin-bottom: 6px;
+}
+
+.track:hover {
+    background: linear-gradient(90deg, rgba(227, 6, 19, 0.08), transparent);
+    border-left: 4px solid #e30613;
+    padding-left: 16px;
+    box-shadow: inset 0 0 15px rgba(227, 6, 19, 0.1);
+}
+
+.track:last-child {
+    border-bottom: none;
+}
+
+.track-number {
+    width: 50px;
+    color: #e30613;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.track-title {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 20px;
+    transition: color 0.3s ease;
+}
+
+.track:hover .track-title {
+    color: #e30613;
+}
+
+audio {
+    width: 380px;
+    height: 32px;
+    border-radius: 20px;
+    outline: none;
+}
+
+/* Global Player */
+.global-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.98), rgba(227, 6, 19, 0.05));
+    border-top: 3px solid #e30613;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    z-index: 200;
+    box-shadow: 0 -8px 30px rgba(227, 6, 19, 0.2), 0 -4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.global-player .now-playing {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+    color: #e30613;
+    letter-spacing: 1px;
+}
+
+.global-player audio {
+    width: 500px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px 20px 100px;
+    color: #666;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.footer::before {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #e30613, transparent);
+    margin: 0 auto 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .album-container {
+        padding: 30px;
+        margin: 0 auto 60px;
+    }
+
+    .album-art {
+        width: 150px;
+        height: 150px;
+    }
+
+    audio {
+        width: 300px;
+    }
+
+    .global-player audio {
+        width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 38px;
+    }
+
+    .nav {
+        gap: 30px;
+        padding: 12px 20px;
+    }
+
+    .nav a {
+        font-size: 14px;
+    }
+
+    .album-container {
+        padding: 25px;
+        margin: 0 auto 50px;
+        max-width: 95%;
+    }
+
+    .album-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding-bottom: 20px;
+    }
+
+    .album-art {
+        width: 140px;
+        height: 140px;
+    }
+
+    .track {
+        flex-wrap: wrap;
+        padding: 12px 15px;
+    }
+
+    .track-number {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .track-title {
+        width: 100%;
+        margin: 0;
+    }
+
+    audio {
+        width: 100%;
+        height: 28px;
+    }
+
+    .global-player {
+        flex-direction: column;
+        padding: 12px 20px;
+        gap: 15px;
+    }
+
+    .global-player .now-playing {
+        width: 100%;
+        text-align: center;
+    }
+
+    .global-player audio {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 28px;
+        margin: 40px 0 30px;
+    }
+
+    .nav {
+        gap: 15px;
+    }
+
+    .album-container {
+        padding: 20px;
+        margin: 0 auto 40px;
+    }
+
+    .album-art {
+        width: 120px;
+        height: 120px;
+    }
+
+    .album-title {
+        font-size: 22px;
+    }
+
+    .album-meta {
+        font-size: 13px;
+    }
+
+    .track-number {
+        font-size: 14px;
+    }
+
+    .track-title {
+        font-size: 14px;
+    }
+}
