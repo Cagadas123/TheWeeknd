@@ -1384,11 +1384,32 @@
 
     </div>
 
+    <div class="global-player">
+        <!-- Display: Shows currently playing song title -->
+        <div class="now-playing" id="now-playing">No song playing</div>
+        
+        <!-- Main Audio Player: Controls playback for selected song -->
+        <audio id="global-audio" controls></audio>
+    </div>
+
     <div class="footer">
         Page 3 • The Weeknd Discography
     </div>
+<script>
+    const audios = document.querySelectorAll("audio");
 
-
+audios.forEach(audio => {
+    audio.addEventListener("play", () => {
+        audios.forEach(otherAudio => {
+            if (otherAudio !== audio) {
+                otherAudio.pause();
+                otherAudio.currentTime = 0; // optional: resets the other song
+            }
+        });
+    });
+});
+</script>
+    
 </body>
 
 </html>
