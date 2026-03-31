@@ -14,14 +14,19 @@ html {
     scroll-behavior: smooth;
 }
 
+/* ── HERO ─────────────────────────────────────────────────────────────── */
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0,0,0,0.7), rgba(90,0,0,0.8)),
-    url('https://wallpapercave.com/wp/wp8476327.jpg') center/cover no-repeat;
+        url('https://wallpapercave.com/wp/wp8476327.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.overlay {
+    padding: 0 20px;          /* prevents text from kissing screen edges */
 }
 
 .overlay h1 {
@@ -34,19 +39,23 @@ html {
     margin: 15px 0;
 }
 
+/* ── BUTTONS ──────────────────────────────────────────────────────────── */
 .btn {
+    display: inline-block;    /* needed so margin works on wrapped buttons */
     padding: 10px 25px;
     background: crimson;
     color: white;
     text-decoration: none;
     border-radius: 20px;
     transition: 0.3s;
+    margin: 5px 4px;          /* spacing when buttons wrap to multiple lines */
 }
 
 .btn:hover {
     background: darkred;
 }
 
+/* ── INTRO ────────────────────────────────────────────────────────────── */
 .intro {
     padding: 70px 20px;
     text-align: center;
@@ -59,6 +68,7 @@ html {
     color: #ccc;
 }
 
+/* ── ALBUMS ───────────────────────────────────────────────────────────── */
 .albums {
     padding: 60px 20px;
     text-align: center;
@@ -85,6 +95,7 @@ html {
     transform: translateY(-10px);
 }
 
+/* ── QUOTE ────────────────────────────────────────────────────────────── */
 .quote {
     padding: 50px;
     text-align: center;
@@ -93,9 +104,126 @@ html {
     background: #111;
 }
 
+/* ── FOOTER ───────────────────────────────────────────────────────────── */
 footer {
     text-align: center;
     padding: 20px;
     background: #000;
     color: #666;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   MEDIA QUERIES
+   ══════════════════════════════════════════════════════════════════════
+
+   Breakpoints used:
+     768px  – tablets / large phones (landscape)
+     480px  – small phones (portrait)
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── TABLET  (max-width: 768px) ──────────────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Hero: shrink the massive h1 */
+    .overlay h1 {
+        font-size: 42px;
+        letter-spacing: 1px;
+    }
+
+    .overlay p {
+        font-size: 14px;
+    }
+
+    /* Stack buttons vertically so they don't crowd each other */
+    .overlay .btn {
+        display: block;
+        width: fit-content;
+        margin: 8px auto;
+    }
+
+    /* Intro section: tighter vertical padding */
+    .intro {
+        padding: 50px 20px;
+    }
+
+    /* Albums: 2 per row feels natural on tablets */
+    .album img {
+        width: 140px;
+    }
+
+    /* Quote: reduce heavy side padding */
+    .quote {
+        padding: 40px 30px;
+        font-size: 15px;
+    }
+}
+
+
+/* ── SMALL PHONE  (max-width: 480px) ────────────────────────────────── */
+@media (max-width: 480px) {
+
+    /* Hero heading: readable but fits the narrow viewport */
+    .overlay h1 {
+        font-size: 30px;
+        letter-spacing: 0.5px;
+    }
+
+    .overlay p {
+        font-size: 13px;
+        margin: 10px 0;
+    }
+
+    /* Buttons: full-width pill buttons feel native on mobile */
+    .overlay .btn {
+        display: block;
+        width: 80%;
+        max-width: 260px;
+        text-align: center;
+        padding: 12px 0;
+        margin: 8px auto;
+    }
+
+    /* Intro: generous horizontal breathing room */
+    .intro {
+        padding: 40px 16px;
+    }
+
+    .intro h2 {
+        font-size: 18px;
+    }
+
+    .intro p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    /* Albums: single column on very small screens */
+    .album-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .album img {
+        width: 200px;       /* bigger on single-column so it doesn't look tiny */
+    }
+
+    /* Albums heading */
+    .albums h2 {
+        font-size: 18px;
+    }
+
+    /* Quote: minimal padding, slightly smaller text */
+    .quote {
+        padding: 30px 16px;
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    /* Footer: slightly smaller text */
+    footer {
+        font-size: 12px;
+        padding: 16px;
+    }
 }
