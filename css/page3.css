@@ -11,6 +11,7 @@ body {
     line-height: 1.6;
 }
 
+/* ── NAV ──────────────────────────────────────────────────────────────── */
 nav {
     background: rgba(0, 0, 0, 0.95);
     padding: 15px 5%;
@@ -33,7 +34,11 @@ nav a {
     font-weight: 500;
 }
 
+nav a:hover {
+    color: #e30613;
+}
 
+/* ── PAGE TITLE ───────────────────────────────────────────────────────── */
 h1 {
     text-align: center;
     margin: 60px 0 50px 0;
@@ -41,9 +46,12 @@ h1 {
     letter-spacing: 4px;
     text-transform: uppercase;
     background: linear-gradient(135deg, #ffffff, #e30613);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
+/* ── ALBUM CONTAINER ──────────────────────────────────────────────────── */
 .album-container {
     max-width: 1000px;
     margin: 0 auto 70px auto;
@@ -61,6 +69,7 @@ h1 {
     border-color: rgba(227, 6, 19, 0.4);
 }
 
+/* ── ALBUM HEADER ─────────────────────────────────────────────────────── */
 .album-header {
     display: flex;
     align-items: center;
@@ -77,6 +86,7 @@ h1 {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(227, 6, 19, 0.3), 0 5px 15px rgba(0, 0, 0, 0.6);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;        /* prevents art from squishing when title is long */
 }
 
 .album-container:hover .album-art {
@@ -85,6 +95,7 @@ h1 {
 
 .album-info {
     flex: 1;
+    min-width: 0;          /* allows text to truncate/wrap inside flex child */
 }
 
 .album-title {
@@ -102,6 +113,7 @@ h1 {
     font-weight: 600;
 }
 
+/* ── TRACK ROW ────────────────────────────────────────────────────────── */
 .track {
     display: flex;
     align-items: center;
@@ -129,6 +141,7 @@ h1 {
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 1px;
+    flex-shrink: 0;
 }
 
 .track-title {
@@ -148,11 +161,13 @@ audio {
     height: 32px;
     border-radius: 20px;
     outline: none;
+    flex-shrink: 0;
 }
 
+/* ── FOOTER ───────────────────────────────────────────────────────────── */
 .footer {
     text-align: center;
-    padding: 40px 20px 100px;
+    padding: 40px 20px 60px;
     color: #666;
     font-size: 14px;
     letter-spacing: 1px;
@@ -167,11 +182,19 @@ audio {
     margin: 0 auto 20px;
 }
 
-/* Responsive Design */
+
+/* ══════════════════════════════════════════════════════════════════════
+   MEDIA QUERIES
+   (all three blocks are properly closed — the originals were not)
+   ══════════════════════════════════════════════════════════════════════ */
+
+
+/* ── TABLET / SMALL LAPTOP  (max-width: 1024px) ─────────────────────── */
 @media (max-width: 1024px) {
+
     .album-container {
         padding: 30px;
-        margin: 0 auto 60px;
+        margin: 0 20px 60px;   /* side margin so card doesn't touch viewport edge */
     }
 
     .album-art {
@@ -182,32 +205,45 @@ audio {
     audio {
         width: 300px;
     }
+}                              /* ← closing brace was MISSING in your original */
 
+
+/* ── TABLET PORTRAIT  (max-width: 768px) ────────────────────────────── */
 @media (max-width: 768px) {
+
+    /* Page title */
     h1 {
         font-size: 38px;
+        margin: 50px 16px 40px;
     }
 
+    /* Nav: tighten gap so 3 links don't overflow */
     nav {
-        gap: 30px;
-        padding: 12px 20px;
+        gap: 24px;
+        padding: 12px 5%;
+        flex-wrap: wrap;       /* safety net if viewport is narrow */
     }
 
     nav a {
         font-size: 14px;
     }
 
+    /* Album card */
     .album-container {
         padding: 25px;
-        margin: 0 auto 50px;
-        max-width: 95%;
+        margin: 0 16px 50px;
+        max-width: 100%;
+        border-radius: 14px;
     }
 
+    /* Stack art + info vertically and center them */
     .album-header {
         flex-direction: column;
         text-align: center;
-        gap: 20px;
+        align-items: center;
+        gap: 16px;
         padding-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     .album-art {
@@ -215,65 +251,125 @@ audio {
         height: 140px;
     }
 
-    .track {
-        flex-wrap: wrap;
-        padding: 12px 15px;
-    }
-
-    .track-number {
-        width: 100%;
-        margin-bottom: 8px;
-    }
-
-    .track-title {
-        width: 100%;
-        margin: 0;
-    }
-
-    audio {
-        width: 100%;
-        height: 28px;
-    }
-
-    .now-playing-bar {
-        flex-direction: column;
-        padding: 12px 20px;
-        gap: 15px;
-    }
-    
-@media (max-width: 480px) {
-    h1 {
-        font-size: 28px;
-        margin: 40px 0 30px;
-    }
-
-    nav {
-        gap: 15px;
-    }
-
-    .album-container {
-        padding: 20px;
-        margin: 0 auto 40px;
-    }
-
-    .album-art {
-        width: 120px;
-        height: 120px;
-    }
-
     .album-title {
         font-size: 22px;
     }
 
     .album-meta {
-        font-size: 13px;
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    /* Track row: audio player was 380px which overflows on tablet —
+       wrap number + title on one line, audio on the next */
+    .track {
+        flex-wrap: wrap;
+        padding: 14px 15px;
+        gap: 6px;
     }
 
     .track-number {
-        font-size: 14px;
+        width: auto;
+        margin-right: 10px;
     }
 
     .track-title {
-        font-size: 14px;
+        flex: 1;
+        margin: 0;
+        font-size: 15px;
+    }
+
+    audio {
+        width: 100%;           /* full width below the title row */
+        height: 30px;
+        margin-top: 8px;
+    }
+}                              /* ← closing brace was MISSING in your original */
+
+
+/* ── SMALL PHONE  (max-width: 480px) ────────────────────────────────── */
+@media (max-width: 480px) {
+
+    /* Page title */
+    h1 {
+        font-size: 26px;
+        letter-spacing: 2px;
+        margin: 36px 12px 28px;
+    }
+
+    /* Nav: smaller text, tighter gap */
+    nav {
+        gap: 12px;
+        padding: 10px 4%;
+    }
+
+    nav a {
+        font-size: 12px;
+        letter-spacing: 0.5px;
+    }
+
+    /* Album card */
+    .album-container {
+        padding: 18px;
+        margin: 0 10px 36px;
+        border-radius: 12px;
+    }
+
+    /* Disable the container lift hover — causes jarring jump on tap */
+    .album-container:hover {
+        transform: none;
+    }
+
+    .album-header {
+        gap: 12px;
+        padding-bottom: 16px;
+        margin-bottom: 20px;
+    }
+
+    .album-art {
+        width: 110px;
+        height: 110px;
+        border-radius: 8px;
+    }
+
+    /* Disable the art rotate on hover — doesn't work well on touch */
+    .album-container:hover .album-art {
+        transform: none;
+    }
+
+    .album-title {
+        font-size: 18px;
+        letter-spacing: 0.5px;
+    }
+
+    .album-meta {
+        font-size: 12px;
+        letter-spacing: 0.5px;
+    }
+
+    /* Track row */
+    .track {
+        padding: 10px 10px;
+    }
+
+    .track-number {
+        font-size: 13px;
+        width: 28px;
+        margin-right: 6px;
+    }
+
+    .track-title {
+        font-size: 13px;
+    }
+
+    audio {
+        height: 28px;
+        margin-top: 6px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 30px 16px 40px;
+        font-size: 12px;
     }
 }
