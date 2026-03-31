@@ -11,6 +11,7 @@ body {
     line-height: 1.6;
 }
 
+/* ── HEADER / NAV ─────────────────────────────────────────────────────── */
 header {
     background: rgba(0, 0, 0, 0.95);
     position: fixed;
@@ -52,6 +53,7 @@ nav a:hover {
     color: #e30613;
 }
 
+/* ── MAIN ─────────────────────────────────────────────────────────────── */
 main {
     padding-top: 110px;
     padding-bottom: 170px;
@@ -80,6 +82,7 @@ h1 {
     margin-bottom: 70px;
 }
 
+/* ── ALBUMS GRID ──────────────────────────────────────────────────────── */
 .albums-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -148,13 +151,14 @@ h1 {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
 
+/* ── ALBUM INFO ───────────────────────────────────────────────────────── */
 .album-info {
     padding: 24px 20px;
     text-align: center;
 }
 
-.album-info h3 {
-    font-size: 23px;
+.album-info h2 {
+    font-size: 20px;
     margin-bottom: 8px;
 }
 
@@ -170,6 +174,7 @@ h1 {
     font-size: 15px;
 }
 
+/* ── TRACKLIST / DETAILS ──────────────────────────────────────────────── */
 details {
     margin-top: 15px;
     border-top: 1px solid #333;
@@ -209,6 +214,7 @@ details[open] summary::after {
     line-height: 1.85;
 }
 
+/* ── BACK BUTTON ──────────────────────────────────────────────────────── */
 .back-btn {
     display: inline-flex;
     align-items: center;
@@ -228,6 +234,7 @@ details[open] summary::after {
     transform: translateX(-10px);
 }
 
+/* ── BOTTOM BAR ───────────────────────────────────────────────────────── */
 .bottom-bar {
     position: fixed;
     bottom: 0;
@@ -248,6 +255,7 @@ details[open] summary::after {
     font-weight: 600;
 }
 
+/* ── FOOTER ───────────────────────────────────────────────────────────── */
 footer {
     background: #000;
     text-align: center;
@@ -256,13 +264,220 @@ footer {
     font-size: 14px;
 }
 
-@media (max-width: 768px) {
+
+/* ══════════════════════════════════════════════════════════════════════
+   MEDIA QUERIES
+   ══════════════════════════════════════════════════════════════════════
+
+   Breakpoints:
+     900px  – narrow desktop / large tablet (nav starts to crowd)
+     768px  – tablet portrait
+     480px  – small phone
+   ══════════════════════════════════════════════════════════════════════ */
+
+
+/* ── NARROW DESKTOP / LARGE TABLET  (max-width: 900px) ──────────────── */
+@media (max-width: 900px) {
+
+    /* Nav links start to crowd the logo — reduce gap */
+    nav ul {
+        gap: 18px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    /* Grid: force 2 columns instead of 3 */
     .albums-grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 25px;
     }
 
     h1 {
-        font-size: 38px;
+        font-size: 40px;
+        letter-spacing: 3px;
+    }
+}
+
+
+/* ── TABLET  (max-width: 768px) ──────────────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* ---- Header: stack logo above nav ---- */
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px 5%;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    nav ul {
+        gap: 14px;
+        flex-wrap: wrap;        /* lets links wrap if viewport is very narrow */
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    /* Push main down more because the header is now taller (two rows) */
+    main {
+        padding-top: 130px;
+        padding-bottom: 60px;   /* remove the bottom bar gap — only add if .bottom-bar exists */
+    }
+
+    /* ---- Page title ---- */
+    h1 {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+
+    .subtitle {
+        font-size: 15px;
+        letter-spacing: 2px;
+        margin-bottom: 40px;
+    }
+
+    /* ---- Grid: still 2 columns on tablet ---- */
+    .albums-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    /* ---- Album card info: slightly tighter ---- */
+    .album-info {
+        padding: 18px 14px;
+    }
+
+    .album-info h2 {
+        font-size: 16px;
+    }
+
+    .album-info p,
+    .album-info .year {
+        font-size: 13px;
+    }
+
+    summary {
+        font-size: 13px;
+    }
+
+    .tracklist {
+        font-size: 13px;
+    }
+
+    /* ---- Footer ---- */
+    footer {
+        padding: 30px 20px 20px;
+        font-size: 12px;
+    }
+}
+
+
+/* ── SMALL PHONE  (max-width: 480px) ────────────────────────────────── */
+@media (max-width: 480px) {
+
+    /* ---- Header: tighter padding ---- */
+    header {
+        padding: 12px 4%;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    nav ul {
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    /* More top padding since stacked header is taller */
+    main {
+        padding-top: 140px;
+        padding-bottom: 40px;
+    }
+
+    /* ---- Page title ---- */
+    h1 {
+        font-size: 24px;
+        letter-spacing: 1.5px;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        margin-bottom: 30px;
+    }
+
+    /* ---- Grid: single column — cards are too small at 2-col on 375px ---- */
+    .albums-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    /* ---- Album card ---- */
+    .album-card {
+        border-radius: 12px;
+    }
+
+    /* Constrain card width so it doesn't span the full 375px awkwardly */
+    .album-card {
+        max-width: 360px;
+        margin: 0 auto;
+    }
+
+    .album-info {
+        padding: 16px 14px;
+        text-align: left;       /* left-align feels more readable in single-col */
+    }
+
+    .album-info h2 {
+        font-size: 17px;
+    }
+
+    .album-info .year {
+        font-size: 13px;
+    }
+
+    .album-info p {
+        font-size: 13px;
+    }
+
+    summary {
+        font-size: 13px;
+        justify-content: flex-start;
+    }
+
+    .tracklist {
+        font-size: 12.5px;
+        line-height: 1.75;
+    }
+
+    /* ---- Disable hover transform on touch (no hover on mobile) ---- */
+    .album-card:hover {
+        transform: none;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+    }
+
+    /* ---- Footer ---- */
+    footer {
+        padding: 24px 16px 16px;
+        font-size: 11px;
+        line-height: 1.6;
     }
 }
